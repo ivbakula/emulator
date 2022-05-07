@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # set new variable called PROJECT
 # set(PROJECT <projectname>)
 
-set(PROJECT project)
+set(PROJECT emulator)
 project(${PROJECT} C CXX)
 
 add_subdirectory(main)
-add_subdirectory(src)
-add_subdirectory(test)
+#add_subdirectory(src)
+#add_subdirectory(test)

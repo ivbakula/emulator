@@ -1,0 +1,65 @@
+* Core
+** Execution block
+
+#+begin_src plantuml :file execution-blocks.png
+  interface ExecutionBlockIf {
+    +executeTypeR(opcode, dst, op1, op2) = 0
+    +executeTypeI(opcode, dst, op1, imm) = 0
+
+    # internalExecute(opcode, dst, op1, op2, op3) = 0
+  }
+  abstract ExecutionBlock {
+    +executeTypeR(opcode, dst, op1, op2)
+  }
+
+  ExecutionBlockIf <|-- ExecutionBlock
+  ExecutionBlock -> RegisterBus
+
+  ExecutionBlock <|-- ArithmeticExeBlock
+  ExecutionBlock <|-- MemoryBlock 
+  ExecutionBlock <|-- BranchBlock 
+  ExecutionBlock <|-- SpecialRegOpsBlock 
+  ExecutionBlock <|-- ControlBlock 
+#+end_src
+
+#+begin_src plantuml :file execution-block-bus.png
+  class ExecutionBlockBus {
+    executeTypeR(WhichBlock, opcode, dst, op1, op2) 
+    executeTypeImm(WhichBlock, opcode, dst, op1, imm)
+
+    # map<WhichBlock, ExecutionBlockIf*>
+  }
+#+end_src
+
+#+begin_src plantuml :file register-block.png
+  interface ResourceBlockIf {
+    +read(reg) = 0
+    +write(reg, value) = 0
+  }
+
+  class Regfile {
+  # m_regs[32]
+  }
+
+  class IsrVector {
+  # m_isrVector[32]
+  }
+
+  class SpecialRegs {
+  # m_statusRegs
+  # pc_backup
+  }
+
+  class MemoryTranslationUnit
+
+  ResourceBlockIf <|-- Regfile 
+  ResourceBlockIf <|-- IsrVector
+  ResourceBlockIf <|-- StatusAndControl
+  ResourceBlockIf <|-- MemoryTranslationUnit
+
+  class ResourceBlockBus {
+    +read(Which, reg) 
+    +write(Which, reg, value)
+    # map<Which, RegfileIf>
+  }
+#+end_src
