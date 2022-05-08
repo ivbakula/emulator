@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/emulator.dir/main.cxx.o -o emulator  -lcommon 

@@ -9,5 +9,5 @@ set(PROJECT emulator)
 project(${PROJECT} C CXX)
 
 add_subdirectory(main)
-#add_subdirectory(src)
+add_subdirectory(src)
 #add_subdirectory(test)

@@ -1,0 +1,6 @@
+.cache
+*.json
+Makefile
+*.cmake
+\#*\#
+build

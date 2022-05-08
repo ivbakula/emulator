@@ -63,3 +63,6 @@
     # map<Which, RegfileIf>
   }
 #+end_src
+
+#+RESULTS:
+[[file:register-block.png]]
