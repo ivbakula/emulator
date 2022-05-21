@@ -4,7 +4,7 @@
 
 Core::Core(ExternalLayer::ExternalBus* externalBus) {
   ResourceLayer::ResourceBlockIf::setExternalBus(externalBus);
-  ExecutionLayer::ExecutionBlock::setResourceBlockBus(&m_resourceBlockBus);
+  ExecutionLayer::ExecutionBlockIf::setResourceBlockBus(&m_resourceBlockBus);
   m_stateMachine = std::make_unique<ControlLayer::StateMachine>(m_resourceBlockBus, m_execBlockBus);
 }
 

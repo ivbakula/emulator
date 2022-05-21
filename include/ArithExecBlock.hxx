@@ -12,10 +12,7 @@ enum {
   OPCODE_XOR
 };
 
-class ArithExecBlock : public ExecutionBlock {
- public:
-  void executeTypeI(uint8_t opcode, uint8_t dstreg, uint8_t op1reg, uint32_t imm) override;
-
+class ArithExecBlock : public ExecutionBlockIf {
  protected:
   virtual void internalExecute(uint8_t opcode, uint8_t dstreg, uint32_t op1, uint32_t op2)  override;
 };

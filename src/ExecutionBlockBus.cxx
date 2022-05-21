@@ -1,7 +1,8 @@
 #include "ExecutionBlockBus.hxx"
 
 #include "ArithExecBlock.hxx"
-#include "ExecutionBlockIf.hxx"
+#include "BranchBlock.hxx"
+#include "CtrlBlock.hxx"
 
 namespace ExecutionLayer {
 
@@ -17,10 +18,18 @@ void ExecutionBlockBus::executeTypeI(ExecutionBlocksEnum block, uint8_t opcode, 
   }
 }
 
+void ExecutionBlockBus::executeTypeIB(ExecutionBlocksEnum block, uint8_t opcode, uint8_t dstreg, uint32_t imm) {
+  if (m_executionBlocks.find(block) != m_executionBlocks.end()) {
+    m_executionBlocks[block]->executeTypeIB(opcode, dstreg, imm);
+  }
+}
+
 void ExecutionBlockBus::setExecutionBlock(ExecutionBlocksEnum name, ExecutionBlockIf *block) {
   m_executionBlocks[name] = block;
 }
 
 std::map<ExecutionBlocksEnum, ExecutionBlockIf *> ExecutionBlockBus::m_executionBlocks{
-    {ExecutionBlocksEnum::BLOCK_ARITHMETIC, new ArithExecBlock}};
+    {ExecutionBlocksEnum::BLOCK_ARITHMETIC, new ArithExecBlock},
+    {ExecutionBlocksEnum::BLOCK_CTRL, new CtrlBlock},
+    {ExecutionBlocksEnum::BLOCK_BRANCH, new BranchBlock}};
 }  // namespace ExecutionLayer

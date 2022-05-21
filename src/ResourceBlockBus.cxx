@@ -1,5 +1,6 @@
 #include "ResourceBlockBus.hxx"
 
+#include "CtrlRegsBlock.hxx"
 #include "MTUResourceBlock.hxx"
 #include "RegfileResourceBlock.hxx"
 
@@ -23,5 +24,6 @@ uint32_t ResourceBlockBus::read(ResourceBlocksEnum which, uint32_t index, std::s
 
 std::map<ResourceBlocksEnum, ResourceBlockIf *> ResourceBlockBus::m_resourceBlocks{
     {ResourceBlocksEnum::BLOCK_REGFILE, new RegfileResourceBlock},
-    {ResourceBlocksEnum::BLOCK_MTU, new MTUResourceBlock}};
+    {ResourceBlocksEnum::BLOCK_MTU, new MTUResourceBlock},
+    {ResourceBlocksEnum::BLOCK_CTRL_REGS, new CtrlRegsBlock}};
 }  // namespace ResourceLayer

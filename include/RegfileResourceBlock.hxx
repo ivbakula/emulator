@@ -9,5 +9,15 @@ class RegfileResourceBlock : public ResourceBlockIf {
 
  private:
   uint32_t m_regfile[32] {0, 0x4};
+
+  union {
+    uint8_t data;
+    struct {
+      uint8_t m_zf : 1;
+      uint8_t m_nf : 1;
+      uint8_t m_if : 1;
+    } flags;
+  } m_status;
 };
+
 }  // namespace ResourceLayer

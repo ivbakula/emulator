@@ -8,8 +8,10 @@ enum class State {
   STATE_FETCH,
   STATE_DECODE,
   STATE_EXECUTE,
+  STATE_CHECK,
+  STATE_BREAK,
+  STATE_ERROR,
   STATE_HALT,
-  STATE_ERROR
 };
 
 class StateMachine {
