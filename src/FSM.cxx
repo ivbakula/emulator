@@ -38,8 +38,8 @@ union DecoderMux {
 
 constexpr uint32_t CODING_SCHEME_TYPE_R{0x0};
 constexpr uint32_t CODING_SCHEME_TYPE_I{0x1};
-constexpr uint32_t CODING_SCHEME_TYPE_IB{0x2};
-
+constexpr uint32_t CODING_SCHEME_TYPE_IB{0x2}
+;
 bool StateMachine::executeState(void) {
   bool status{true};
   uint32_t pc = m_resourceBlockBus.read(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 1, sizeof(uint32_t));  // read program counter
