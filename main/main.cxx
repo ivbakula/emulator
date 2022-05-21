@@ -1,5 +1,9 @@
 #include "Core.hxx"
+#include "PeripherialBus.hxx"
 
 int main() {
-  Core core;
+  ExternalLayer::ExternalBus external;
+  Core core(&external);
+
+  core.run();
 }

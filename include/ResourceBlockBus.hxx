@@ -14,11 +14,10 @@ enum class ResourceBlocksEnum {
 }; 
 
 // TODO add enum for register names
-
 class ResourceBlockBus {
  public: 
-  void write(ResourceBlocksEnum which, uint32_t index, uint32_t data);
-  uint32_t read(ResourceBlocksEnum which, uint32_t index);
+  virtual void write(ResourceBlocksEnum which, uint32_t index, uint32_t data, std::size_t size = sizeof(uint32_t));
+  virtual uint32_t read(ResourceBlocksEnum which, uint32_t index, std::size_t size = sizeof(uint32_t));
 
  private:
   static std::map<ResourceBlocksEnum, ResourceBlockIf*> m_resourceBlocks;

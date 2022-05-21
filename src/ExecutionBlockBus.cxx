@@ -17,6 +17,10 @@ void ExecutionBlockBus::executeTypeI(ExecutionBlocksEnum block, uint8_t opcode, 
   }
 }
 
+void ExecutionBlockBus::setExecutionBlock(ExecutionBlocksEnum name, ExecutionBlockIf *block) {
+  m_executionBlocks[name] = block;
+}
+
 std::map<ExecutionBlocksEnum, ExecutionBlockIf *> ExecutionBlockBus::m_executionBlocks{
     {ExecutionBlocksEnum::BLOCK_ARITHMETIC, new ArithExecBlock}};
 }  // namespace ExecutionLayer

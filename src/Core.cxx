@@ -1,13 +1,17 @@
 #include "Core.hxx"
-#include ""
+
 #include <memory>
 
-Core::Core()
-{
+Core::Core(ExternalLayer::ExternalBus* externalBus) {
+  ResourceLayer::ResourceBlockIf::setExternalBus(externalBus);
   ExecutionLayer::ExecutionBlock::setResourceBlockBus(&m_resourceBlockBus);
-  m_stateMachine = std::make_unique<ControlLayer::StateMachine>(m_resourceBlockBus, m_execBlockBus); 
+  m_stateMachine = std::make_unique<ControlLayer::StateMachine>(m_resourceBlockBus, m_execBlockBus);
 }
 
 void Core::run() {
-  while(m_stateMachine->executeState());
+  m_stateMachine->executeState();
+
+  for (int i = 0; i < 6; i++) {
+    m_stateMachine->executeState();
+  }
 }

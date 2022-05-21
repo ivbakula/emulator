@@ -6,8 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # set(PROJECT <projectname>)
 
 set(PROJECT emulator)
+
 project(${PROJECT} C CXX)
 
 add_subdirectory(main)
 add_subdirectory(src)
-#add_subdirectory(test)
+add_subdirectory(test)
+
+target_compile_options(${PROJECT} PUBLIC -Wimplicit-fallthrough -ggdb)
