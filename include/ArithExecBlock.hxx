@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ExecutionBlockIf.hxx"
 
 namespace ExecutionLayer {

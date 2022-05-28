@@ -8,6 +8,7 @@ void BranchBlock::internalExecute(uint8_t opcode, uint8_t dstreg, uint32_t op1, 
   bool isNegative = (resourceBlockBus->read(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, sizeof(uint32_t)) == 1);
 
   uint32_t result {op1 + op2};
+  int32_t compare {0};
   bool doJump {false};
   
   switch (opcode) {
@@ -35,13 +36,13 @@ void BranchBlock::internalExecute(uint8_t opcode, uint8_t dstreg, uint32_t op1, 
       break;
       
     case OPCODE_CMP:
-      result = op1 - op2;
-      if (result < 0) {
-        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 32, 1, sizeof(uint32_t));
-        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, 0, sizeof(uint32_t));
-      } else if (result == 0) {
-        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 32, 0, sizeof(uint32_t));
-        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, 1, sizeof(uint32_t));
+      compare = op1 - op2;
+      if (compare < 0) {
+        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 32, 0, sizeof(uint32_t)); // set zero flag low
+        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, 1, sizeof(uint32_t)); // set negative flag high
+      } else if (compare == 0) {
+        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 32, 1, sizeof(uint32_t)); // set zero flag high
+        resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, 0, sizeof(uint32_t)); // set negative flag low
       } else {
         resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 32, 0, sizeof(uint32_t));
         resourceBlockBus->write(ResourceLayer::ResourceBlocksEnum::BLOCK_REGFILE, 33, 0, sizeof(uint32_t));               

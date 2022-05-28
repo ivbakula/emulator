@@ -3,6 +3,7 @@
 #include "ArithExecBlock.hxx"
 #include "BranchBlock.hxx"
 #include "CtrlBlock.hxx"
+#include "MemoryExeBlock.hxx"
 
 namespace ExecutionLayer {
 
@@ -31,5 +32,6 @@ void ExecutionBlockBus::setExecutionBlock(ExecutionBlocksEnum name, ExecutionBlo
 std::map<ExecutionBlocksEnum, ExecutionBlockIf *> ExecutionBlockBus::m_executionBlocks{
     {ExecutionBlocksEnum::BLOCK_ARITHMETIC, new ArithExecBlock},
     {ExecutionBlocksEnum::BLOCK_CTRL, new CtrlBlock},
-    {ExecutionBlocksEnum::BLOCK_BRANCH, new BranchBlock}};
+    {ExecutionBlocksEnum::BLOCK_BRANCH, new BranchBlock},
+    {ExecutionBlocksEnum::BLOCK_MEMORY, new MemoryExeBlock}};
 }  // namespace ExecutionLayer
